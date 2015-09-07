@@ -58,7 +58,7 @@
 
   (if (env :dev) (parser/cache-off!))
   (start-nrepl)
-  (db/connect!)
+  ;(db/connect!)
   ;;start the expired session cleanup job
   (session/start-cleanup-job!)
   (timbre/info (str
@@ -72,7 +72,7 @@
   []
   (timbre/info "mobilecareserver is shutting down...")
   (stop-nrepl)
-  (db/disconnect!)
+  ;(db/disconnect!)
   (timbre/info "shutdown complete!"))
 
 (def app-base

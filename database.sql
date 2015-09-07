@@ -30,6 +30,7 @@ db.runCommand(
 use doctorapp
 
 mongo  127.0.0.1/doctorapp -u jack -p 1313
+mongo  127.0.0.1/mobileapp -u jack -p 1313
 
 
 db.createUser(
@@ -37,10 +38,19 @@ db.createUser(
     user:"jack",
     pwd:"1313",
     roles:[
-      {role:"userAdminAnyDatabase",db:"doctorapp"}
+      {role:"userAdminAnyDatabase",db:"mobileapp"}
     ]
   }
 )
+
+db.createUser( { "user" : "jack",
+                 "pwd": "1313",
+
+                 "roles" : [ { role: "clusterAdmin", db: "admin" },
+                             { role: "readAnyDatabase", db: "admin" },
+                             "readWrite"
+                             ] },
+               { w: "majority" , wtimeout: 5000 } )
 
 
 show dbs
