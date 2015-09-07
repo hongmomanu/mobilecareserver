@@ -2,6 +2,7 @@
   (:require [mobilecareserver.layout :as layout]
             [compojure.core :refer [defroutes GET]]
             [ring.util.http-response :refer [ok]]
+            [clojure.data.json :as json]
             [clojure.java.io :as io]))
 
 (defn home-page []

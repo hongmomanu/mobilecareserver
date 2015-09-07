@@ -1,6 +1,7 @@
 (ns mobilecareserver.handler
   (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [mobilecareserver.routes.home :refer [home-routes]]
+            [mobilecareserver.routes.user :refer [user-routes]]
             [mobilecareserver.middleware :as middleware]
             [mobilecareserver.session :as session]
             [mobilecareserver.db.core :as db]
@@ -77,6 +78,7 @@
 (def app-base
   (routes
     (wrap-routes #'home-routes middleware/wrap-csrf)
+    (wrap-routes #'user-routes middleware/wrap-formats)
     #'base-routes))
 
 (def app (middleware/wrap-base #'app-base))
