@@ -7,7 +7,9 @@
             [monger.json]
             )
   (:import [org.bson.types ObjectId]
+           [java.util  Date Calendar]
            )
+
   )
 
 
@@ -40,4 +42,30 @@
     (ok tempdtetail)
     )
 )
+(defn getrecordbyid [id]
+    (let [
+        record (db/get-record-byid (ObjectId. id))
+    ]
+
+    (ok record)
+    )
+)
+(defn addrecord[item]
+
+    (try
+      (let [
+             item (conj {:time (new Date)} item)
+             ]
+
+      (do
+        (ok {:success true :id  (:_id (db/addrecord item))})
+        )
+      )
+      (catch Exception ex
+        (ok {:success false :message (.getMessage ex)})
+        )
+
+    )
+
+  )
 

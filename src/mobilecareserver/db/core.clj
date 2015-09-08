@@ -40,9 +40,20 @@
 
 
   )
+
+(defn addrecord [item]
+  (mc/insert-and-return db "carerecordlists" item)
+  )
+
 (defn get-tempdetail-byid [id]
   (mc/find-map-by-id
     db "caretemplists" id ["content"]
+    )
+
+  )
+(defn get-record-byid [id]
+  (mc/find-map-by-id
+    db "carerecordlists" id
     )
 
   )
