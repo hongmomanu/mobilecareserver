@@ -6,7 +6,7 @@
     [monger.core :as mg]
     [monger.collection :as mc]
     [monger.operators :refer :all]
-    [monger.query :refer [with-collection find options paginate sort]]
+    [monger.query :refer [with-collection find options paginate sort fields]]
      [environ.core :refer [env]])
   (:import java.sql.BatchUpdateException))
 
@@ -25,4 +25,24 @@
   )
 
 
+(defn get-temps []
+  (mc/find-maps
+    db "caretemplists" {} ["title"]
+    )
 
+  )
+(defn get-record[page limit]
+
+  (with-collection db "carerecordlists"
+    (find {} )
+    (fields [:username :cardno :time])
+    (paginate :page page :per-page limit))
+
+
+  )
+(defn get-tempdetail-byid [id]
+  (mc/find-map-by-id
+    db "caretemplists" id ["content"]
+    )
+
+  )

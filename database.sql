@@ -60,13 +60,7 @@ show collections
 
 
 
-db.userslocation.insert(
-   {
-      loc : { type: "Point", coordinates: [120, 30 ] },
-      userid: 1,
-      usertype : 1
-   }
-)
+
 
 
 --用户表
@@ -76,6 +70,41 @@ username : "jack",
 realname : "王小明",
 password:"1"
 })
+
+--急救类型模板表
+db.caretemplists.insert(
+{ title: '中风', content:{checklist:[
+        { text: "处置1",data:[{ text: "挂盐水", checked: true},
+            { text: "打针", checked: false  },
+            { text: "输氧", checked: false }]},
+        { text: "处置2",data:[{ text: "挂盐水", checked: true  },
+            { text: "打针", checked: false  },
+            { text: "输氧", checked: false  }]},
+        { text: "处置3",data:[{ text: "挂盐水", checked: true },
+            { text: "打针", checked: false},
+            { text: "输氧", checked: false}]}
+    ],
+    options:""
+    }
+    }
+)
+--急救记录表
+db.carerecordlists.insert(
+{ username:'王小明',cardno:'1212121', tempcontent:{checklist:[
+        { text: "处置1",data:[{ text: "挂盐水", checked: true},
+            { text: "打针", checked: false  },
+            { text: "输氧", checked: false }]},
+        { text: "处置2",data:[{ text: "挂盐水", checked: true  },
+            { text: "打针", checked: false  },
+            { text: "输氧", checked: false  }]},
+        { text: "处置3",data:[{ text: "挂盐水", checked: true },
+            { text: "打针", checked: false},
+            { text: "输氧", checked: false}]}
+    ],
+    options:""
+    },caredetail:{},time:new Date()
+    }
+)
 
 
 --消息表维护 (1 doctor,0 patient)
