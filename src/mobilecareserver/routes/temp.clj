@@ -14,5 +14,6 @@
   (GET "/temp/getrecordbyid" [id] (temp/getrecordbyid id))
   (GET "/temp/gettempbyid" [id] (temp/gettempdetailbyid id))
   (POST "/temp/addrecord" [params] (temp/addrecord params))
+  (POST "/temp/saverecord" [id content] (temp/saverecord id content))
  )
 

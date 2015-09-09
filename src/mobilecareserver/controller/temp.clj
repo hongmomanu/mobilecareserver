@@ -69,3 +69,18 @@
 
   )
 
+(defn saverecord [id content]
+
+  (try
+      (do
+        (db/saverecord (ObjectId. id) content)
+        (ok {:success true})
+        )
+
+    (catch Exception ex
+      (ok {:success false :message (.getMessage ex)})
+      )
+
+    )
+  )
+

@@ -57,3 +57,9 @@
     )
 
   )
+
+(defn saverecord [id content]
+
+  (mc/update-by-id db "carerecordlists" id content)
+
+  )
