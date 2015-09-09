@@ -13,9 +13,6 @@
   )
 
 
-
-
-
 (defn gettemp []
     (let [
         temps (db/get-temps)
@@ -50,6 +47,7 @@
     (ok record)
     )
 )
+
 (defn addrecord[item]
 
     (try
@@ -68,7 +66,7 @@
     )
 
   )
-
+;; 保存历史记录
 (defn saverecord [id content]
 
   (try
