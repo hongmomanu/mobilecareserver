@@ -13,7 +13,7 @@
 
 (defn start-server [port]
   (init)
-  (reset! server (immutant/run app :port port)))
+  (reset! server (immutant/run app :port port :host "0.0.0.0")))
 
 (defn stop-server []
   (when @server
