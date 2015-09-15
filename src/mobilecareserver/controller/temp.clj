@@ -12,7 +12,7 @@
 
   )
 
-
+;;获取模板
 (defn gettemp []
     (let [
         temps (db/get-temps)
@@ -21,6 +21,7 @@
     (ok temps)
     )
 )
+;;获取历史记录
 (defn getrecord [page limit]
     (let [
            page (read-string page)
@@ -31,6 +32,7 @@
     (ok records)
     )
 )
+;; 根据id获取模板详细信息
 (defn gettempdetailbyid [id]
     (let [
         tempdtetail (db/get-tempdetail-byid (ObjectId. id))
@@ -39,6 +41,7 @@
     (ok tempdtetail)
     )
 )
+;; 根据id获取记录详细信息
 (defn getrecordbyid [id]
     (let [
         record (db/get-record-byid (ObjectId. id))
@@ -48,6 +51,7 @@
     )
 )
 
+;;新增记录
 (defn addrecord[item]
 
     (try
