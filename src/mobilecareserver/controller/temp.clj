@@ -50,6 +50,15 @@
     (ok record)
     )
 )
+;; 根据关键字获取记录
+(defn getrecordbykey [key]
+    (let [
+        record (db/get-record-bykey key)
+    ]
+
+    (ok record)
+    )
+)
 
 ;;新增记录
 (defn addrecord[item]

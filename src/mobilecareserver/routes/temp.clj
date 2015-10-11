@@ -12,6 +12,7 @@
   (GET "/temp/gettemp" [] (temp/gettemp))
   (GET "/temp/getrecord" [page limit] (temp/getrecord page limit))
   (GET "/temp/getrecordbyid" [id] (temp/getrecordbyid id))
+  (GET "/temp/getrecordbykey" [key] (temp/getrecordbykey key))
   (GET "/temp/gettempbyid" [id] (temp/gettempdetailbyid id))
   (POST "/temp/addrecord" [params] (temp/addrecord params))
   (POST "/temp/saverecord" [id content] (temp/saverecord id content))

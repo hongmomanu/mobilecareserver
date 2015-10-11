@@ -57,6 +57,13 @@
     )
 
   )
+(defn get-record-bykey [key]
+  (mc/find-maps
+    db "carerecordlists"  {$or [{:username {$regex (str ".*" key ".*")}}
+                                {:cardno {$regex (str ".*" key ".*")}}]}
+    )
+
+  )
 
 (defn saverecord [id content]
 
