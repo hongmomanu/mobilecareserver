@@ -32,6 +32,12 @@ use doctorapp
 mongo  127.0.0.1/doctorapp -u jack -p 1313
 mongo  127.0.0.1/mobileapp -u jack -p 1313
 
+db.products.update(
+   { _id: 100 },
+   { $set: { "details.make": "zzz" } },
+   false,true
+)
+
 
 db.createUser(
   {

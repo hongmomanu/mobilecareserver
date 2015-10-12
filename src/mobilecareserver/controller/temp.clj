@@ -21,6 +21,20 @@
     (ok temps)
     )
 )
+;;获取模板
+(defn gettemptree [id]
+    (let [
+        temps (if (nil? id) (map #(conj % {:state "opened" :children [
+                                                                       {:_id (str (:_id %) "_1") :title "自定义处置内容" :prop "options" :state "opened" }
+                                                                       {:_id (str (:_id %) "_2") :title "模板套餐列表" :prop "checklist" :state "closed" }
+                                                                       ]}) (db/get-temps))
+
+                (db/get-tempdetail-byid (ObjectId. id)))
+    ]
+
+    (ok temps)
+    )
+)
 ;;获取历史记录
 (defn getrecord [page limit]
     (let [

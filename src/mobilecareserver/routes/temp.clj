@@ -10,6 +10,7 @@
 
 (defroutes temp-routes
   (GET "/temp/gettemp" [] (temp/gettemp))
+  (GET "/temp/gettemptree" [id] (temp/gettemptree id))
   (GET "/temp/getrecord" [page limit] (temp/getrecord page limit))
   (GET "/temp/getrecordbyid" [id] (temp/getrecordbyid id))
   (GET "/temp/getrecordbykey" [key] (temp/getrecordbykey key))
