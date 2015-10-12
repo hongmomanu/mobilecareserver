@@ -44,19 +44,21 @@
 (defn addrecord [item]
   (mc/insert-and-return db "carerecordlists" item)
   )
-
+;;根据id查询模板详细内容
 (defn get-tempdetail-byid [id]
   (mc/find-map-by-id
     db "caretemplists" id ["content"]
     )
 
   )
+;;根据id查询记录
 (defn get-record-byid [id]
   (mc/find-map-by-id
     db "carerecordlists" id
     )
 
   )
+;; 通过关键字查询
 (defn get-record-bykey [key]
   (mc/find-maps
     db "carerecordlists"  {$or [{:username {$regex (str ".*" key ".*")}}
@@ -64,7 +66,7 @@
     )
 
   )
-
+;;保存最新记录
 (defn saverecord [id content]
 
   (mc/update-by-id db "carerecordlists" id content)
