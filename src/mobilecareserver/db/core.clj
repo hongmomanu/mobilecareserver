@@ -48,7 +48,9 @@
 (defn addtemp [item]
   (mc/insert-and-return db "caretemplists" item)
   )
-
+(defn removetempbyid [oid]
+  (mc/remove-by-id db "caretemplists" oid)
+  )
 (defn updatetempbyid[item id]
   (mc/update-by-id db "caretemplists" id  {$set item} )
   )

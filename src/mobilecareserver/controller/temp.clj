@@ -36,7 +36,7 @@
          idarr (clojure.string/split id #"_")
          ;level (second   idarr)
          data (:checklist ( :content (db/get-tempdetail-byid (ObjectId. (first idarr)))))
-         test (println data idarr)
+
          content (map-indexed (fn [idx itm] (do (conj {} {
                                                        :title (:text itm)
                                                        :state "opened"
@@ -233,6 +233,19 @@
 
   )
 
+(defn removemm01 [id]
+  (try
+      (do
+        (db/removetempbyid (ObjectId. id))
+        (ok {:success true :message "删除成功" })
+        )
+
+    (catch Exception ex
+      (ok {:success false :message (.getMessage ex)})
+      )
+
+    )
+  )
 
 (defn altertemp3[parenttext text id value]
 
