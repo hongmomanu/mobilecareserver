@@ -27,6 +27,7 @@
   (map-indexed (fn [idx itm] (conj {} {
                                         :title (:text itm)
                                         :_id (str id "_3_" idx)
+                                        :id id
                                         :value (:checked itm)
                                         })) data)
   )
@@ -40,6 +41,7 @@
                                                        :title (:text itm)
                                                        :state "opened"
                                                        :_id (str (first idarr) "_2_" idx)
+                                                       :id (first idarr)
                                                        :children (getchecklistdetail (:data itm) (first idarr))
                                                        }))) data)
 
@@ -145,6 +147,38 @@
 
   )
 
+;;新增模板
+(defn addtemp2[keytext text id]
+
+    (try
+      (let [
+
+             olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+             data (:checklist  olddata)
+             childrendata (first (filter (fn [x]
+                                    (= (:text x) keytext)) data))
+             childrendatano  (filter (fn [x]
+                                           (not= (:text x) keytext)) data)
+             newchildrendata (conj (:data childrendata) {:text text :checked false} )
+
+             newitem (conj childrendatano {:text keytext :data newchildrendata})
+             ]
+
+      (do
+        (db/updatetempbyid {:content {:checklist newitem :options (:options  olddata)}} (ObjectId. id))
+        (ok {:success true :message "添加成功"})
+        )
+      )
+      (catch Exception ex
+        (ok {:success false :message (.getMessage ex)})
+        )
+
+    )
+
+  )
+
+
+
 
 (defn removetemp2[text id]
 
@@ -165,6 +199,65 @@
       (catch Exception ex
         (ok {:success false :message (.getMessage ex)})
         )
+
+    )
+
+  )
+
+(defn removetemp3[parenttext text id]
+
+  (try
+    (let [
+
+           olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+           data (:checklist  olddata)
+           childrendata (first (filter (fn [x]
+                                         (= (:text x) parenttext)) data))
+           childrendatano  (filter (fn [x]
+                                     (not= (:text x) parenttext)) data)
+           newchildrendata (filter (fn [x](not= (:text x) text) ) (:data childrendata) )
+
+           newitem (conj childrendatano {:text parenttext :data newchildrendata})
+           ]
+
+      (do
+        (db/updatetempbyid {:content {:checklist newitem :options (:options  olddata)}} (ObjectId. id))
+        (ok {:success true :message "添加成功"})
+        )
+      )
+    (catch Exception ex
+      (ok {:success false :message (.getMessage ex)})
+      )
+
+    )
+
+  )
+
+
+(defn altertemp3[parenttext text id value]
+
+  (try
+    (let [
+
+           olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+           data (:checklist  olddata)
+           childrendata (first (filter (fn [x]
+                                         (= (:text x) parenttext)) data))
+           childrendatano  (filter (fn [x]
+                                     (not= (:text x) parenttext)) data)
+           newchildrendata (conj (filter (fn [x](not= (:text x) text) ) (:data childrendata) ) {:text text :checked value})
+
+           newitem (conj childrendatano {:text parenttext :data newchildrendata})
+           ]
+
+      (do
+        (db/updatetempbyid {:content {:checklist newitem :options (:options  olddata)}} (ObjectId. id))
+        (ok {:success true :message "添加成功"})
+        )
+      )
+    (catch Exception ex
+      (ok {:success false :message (.getMessage ex)})
+      )
 
     )
 

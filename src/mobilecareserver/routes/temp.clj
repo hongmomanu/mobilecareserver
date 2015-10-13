@@ -18,7 +18,10 @@
   (POST "/temp/addrecord" [params] (temp/addrecord params))
   (POST "/temp/addtemp0" [title] (temp/addtemp0 title))
   (POST "/temp/addtemp1" [text id] (temp/addtemp1 text id))
+  (POST "/temp/addtemp2" [keytext text id] (temp/addtemp2 keytext text id))
   (POST "/temp/removetemp2" [text id] (temp/removetemp2 text id))
+  (POST "/temp/removetemp3" [parenttext text id] (temp/removetemp3 parenttext text id))
+  (POST "/temp/altertemp3" [parenttext text id value] (temp/altertemp3 parenttext text id value))
   (POST "/temp/saverecord" [id content] (temp/saverecord id content))
  )
 
