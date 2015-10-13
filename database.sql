@@ -29,8 +29,8 @@ db.runCommand(
 
 use doctorapp
 
-mongo  127.0.0.1/doctorapp -u jack -p 1313
-mongo  127.0.0.1/mobileapp -u jack -p 1313
+mongo  111.1.76.108/doctorapp -u jack -p 1313
+mongo  111.1.76.108/mobileapp -u jack -p 1313
 
 db.products.update(
    { _id: 100 },

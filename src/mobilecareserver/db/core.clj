@@ -44,6 +44,15 @@
 (defn addrecord [item]
   (mc/insert-and-return db "carerecordlists" item)
   )
+
+(defn addtemp [item]
+  (mc/insert-and-return db "caretemplists" item)
+  )
+
+(defn updatetempbyid[item id]
+  (mc/update-by-id db "caretemplists" id  {$set item} )
+  )
+
 ;;根据id查询模板详细内容
 (defn get-tempdetail-byid [id]
   (mc/find-map-by-id
@@ -69,6 +78,9 @@
 ;;保存最新记录
 (defn saverecord [id content]
 
-  (mc/update-by-id db "carerecordlists" id content)
+  (mc/update-by-id db "carerecordlists" id {$set content} )
 
   )
+
+
+

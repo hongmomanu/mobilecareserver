@@ -102,7 +102,75 @@
     )
 )
 
-;;新增记录
+;;新增模板
+(defn addtemp0[title]
+
+    (try
+      (let [
+             item {:title title :content {:checklist [] :options ""}}
+             ]
+
+      (do
+        (ok {:success true :message "添加成功" :id  (:_id (db/addtemp item))})
+        )
+      )
+      (catch Exception ex
+        (ok {:success false :message (.getMessage ex)})
+        )
+
+    )
+
+  )
+  ;;新增模板
+(defn addtemp1[text id]
+
+    (try
+      (let [
+             item {:text text :data []}
+             olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+             data (:checklist  olddata)
+             newitem (conj data item)
+             ]
+
+      (do
+        (db/updatetempbyid {:content {:checklist newitem :options (:options  olddata)}} (ObjectId. id))
+        (ok {:success true :message "添加成功"})
+        )
+      )
+      (catch Exception ex
+        (ok {:success false :message (.getMessage ex)})
+        )
+
+    )
+
+  )
+
+
+(defn removetemp2[text id]
+
+    (try
+      (let [
+             item {:text text :data []}
+             olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+             data (:checklist  olddata)
+             newitem (filter (fn [x]
+                               (not= (:text x) text)) data)
+             ]
+
+      (do
+        (db/updatetempbyid {:content {:checklist newitem :options (:options  olddata)}} (ObjectId. id))
+        (ok {:success true :message "删除成功"})
+        )
+      )
+      (catch Exception ex
+        (ok {:success false :message (.getMessage ex)})
+        )
+
+    )
+
+  )
+
+  ;;新增记录
 (defn addrecord[item]
 
     (try
