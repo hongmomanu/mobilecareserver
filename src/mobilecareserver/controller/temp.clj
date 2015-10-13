@@ -53,7 +53,7 @@
 (defn gettemptree [id]
     (let [
         temps (if (nil? id) [{:state "opened" :title "全部" :_id "0" :children (map #(conj % {:state "opened" :children [
-                                                                                                                        {:_id (str (:_id %) "_1_0") :id (:_id %) :title "自定义处置内容" :prop "options" :state "opened" }
+                                                                                                                        {:_id (str (:_id %) "_1_0") :id (:_id %) :title "自定义处置内容" :value (:options ( :content (db/get-tempdetail-byid (:_id %))))  :prop "options" :state "opened" }
                                                                                                                         {:_id (str (:_id %) "_1_1") :id (:_id %) :title "模板套餐列表" :prop "checklist" :state "closed" }
                                                                                                                         ]}) (db/get-temps))}]
 
@@ -119,6 +119,27 @@
       (catch Exception ex
         (ok {:success false :message (.getMessage ex)})
         )
+
+    )
+
+  )
+
+(defn altermm10 [id value]
+
+  (try
+    (let [
+           olddata ( :content (db/get-tempdetail-byid (ObjectId. id)))
+           item {:content {:checklist (:checklist olddata) :options value}}
+           ]
+
+      (do
+        (db/updatetempbyid item (ObjectId. id))
+        (ok {:success true :message "添加成功" })
+        )
+      )
+    (catch Exception ex
+      (ok {:success false :message (.getMessage ex)})
+      )
 
     )
 

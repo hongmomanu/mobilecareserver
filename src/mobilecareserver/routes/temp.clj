@@ -23,6 +23,7 @@
   (POST "/temp/removetemp3" [parenttext text id] (temp/removetemp3 parenttext text id))
   (POST "/temp/removemm01" [ id] (temp/removemm01  id))
   (POST "/temp/altertemp3" [parenttext text id value] (temp/altertemp3 parenttext text id value))
+  (POST "/temp/altermm10" [id value] (temp/altermm10  id value))
   (POST "/temp/saverecord" [id content] (temp/saverecord id content))
  )
 
