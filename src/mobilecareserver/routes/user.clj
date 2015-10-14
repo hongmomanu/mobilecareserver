@@ -13,5 +13,10 @@
 
                                            user/userlogin username password
                                            ))
+
+  (POST "/user/adduser" [username realname password ] (
+
+                                           user/adduser username realname password
+                                           ))
   (GET "/user/logout" [] (ok {:success false})))
 

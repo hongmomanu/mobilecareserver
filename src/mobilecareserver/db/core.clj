@@ -24,6 +24,13 @@
 
   )
 
+(defn add-user [user]
+  (mc/insert
+    db "users" user
+    )
+
+  )
+
 
 (defn get-temps []
   (mc/find-maps
