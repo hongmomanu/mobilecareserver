@@ -14,5 +14,6 @@
 
 (defroutes home-routes
   (GET "/" [] (home-page))
+  (GET "/hellomobliecare" [] (ok {:success true}))
   (GET "/about" [] (about-page)))
 
