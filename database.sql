@@ -39,15 +39,7 @@ db.products.update(
 )
 
 
-db.createUser(
-  {
-    user:"jack",
-    pwd:"1313",
-    roles:[
-      {role:"userAdminAnyDatabase",db:"mobileapp"}
-    ]
-  }
-)
+
 
 db.createUser( { "user" : "jack",
                  "pwd": "1313",
